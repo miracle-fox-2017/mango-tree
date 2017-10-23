@@ -89,12 +89,7 @@ class FruitTree {
 class MangoTree extends FruitTree {
   // Produce a mango
   constructor(name, age, height, berbuah, healthyStatus) {
-    super()
-    this._name = name
-    this._age = age
-    this._height = height
-    this._startBuah = berbuah
-    this._healthyStatus = healthyStatus
+    super(name, age, height, berbuah, healthyStatus)
     this._max_capacity = 11
     this._stopGrowing = 7
     this._batasUmur = 10
@@ -127,12 +122,7 @@ class Mango extends Fruit {
 
 class AppleTree extends FruitTree  {
   constructor(name, age, height, berbuah, healthyStatus) {
-    super()
-    this._name = name
-    this._age = age
-    this._height = height
-    this._startBuah = berbuah
-    this._healthyStatus = healthyStatus
+    super(name, age, height, berbuah, healthyStatus)
     this._max_capacity = 10
     this._stopGrowing = 7
     this._batasUmur = 9
@@ -149,12 +139,7 @@ class AppleTree extends FruitTree  {
 
  class PearTree extends FruitTree  {
    constructor(name, age, height, berbuah, healthyStatus) {
-     super()
-     this._name = name
-     this._age = age
-     this._height = height
-     this._startBuah = berbuah
-      this._healthyStatus = healthyStatus
+     super(name, age, height, berbuah, healthyStatus)
      this._max_capacity = 10
      this._stopGrowing = 6
      this._batasUmur = 9
