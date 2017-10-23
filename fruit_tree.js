@@ -13,6 +13,7 @@ class FruitTree {
     this.stop_growing = stop_growing
     this.produce_per_year = produce_per_year
 
+
   }
   getAge() {
     return this._age
@@ -83,7 +84,7 @@ class Fruit {
   }
 }
 
-// let fruitTree = new FruitTree(20, 2, 8, 15)
+// let fruitTree = new FruitTree(4, 20, 2, 8, 15)
 //
 // do {
 //   fruitTree.grow();
@@ -92,7 +93,5 @@ class Fruit {
 //    console.log(`[Year ${fruitTree._age} Report] Height = ${fruitTree._height.toFixed(2)} | Fruits harvested = ${fruitTree._fruits}
 //      (${fruitTree._harvested.quality_good} good, ${fruitTree._harvested.quality_bad} bad)`)
 //  } while (fruitTree.healthyStatus != false)
-
-// fruitTree.harverst()
 
 module.exports = FruitTree, Fruit

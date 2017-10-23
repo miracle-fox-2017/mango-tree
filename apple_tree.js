@@ -9,12 +9,14 @@ class AppleTree extends FruitTree{
 }
 
 // driver code untuk release 0
-  let appleTree = new AppleTree(20, 2, 8, 15)
-  // console.log(appleTree);
-  do {
-    appleTree.grow();
-     appleTree.produceMangoes();
-     appleTree.harverst();
-     console.log(`[Year ${appleTree._age} Report] Height = ${appleTree._height.toFixed(2)} | Fruits harvested = ${appleTree._fruits}
-       (${appleTree._harvested.quality_good} good, ${appleTree._harvested.quality_bad} bad)`)
-   } while (appleTree.healthyStatus != false)
+  // let appleTree = new AppleTree(20, 2, 8, 15)
+  // // console.log(appleTree);
+  // do {
+  //   appleTree.grow();
+  //    appleTree.produceMangoes();
+  //    appleTree.harverst();
+  //    console.log(`[Year ${appleTree._age} Report] Height = ${appleTree._height.toFixed(2)} | Fruits harvested = ${appleTree._fruits}
+  //      (${appleTree._harvested.quality_good} good, ${appleTree._harvested.quality_bad} bad)`)
+  //  } while (appleTree.healthyStatus != false)
+
+module.exports = AppleTree
