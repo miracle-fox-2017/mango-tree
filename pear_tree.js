@@ -2,7 +2,7 @@
 
 let FruitTree = require('./fruit_tree')
 
-class MangoTree extends FruitTree {
+class PearTree extends FruitTree {
   // constructor(fruits,height,age,healt){
     // super()
     // this._age = age
@@ -12,23 +12,23 @@ class MangoTree extends FruitTree {
   // }
 
   getFruits() {
-    if(this._age >= 24){ // tahun ke-24 tidak berbuah
-      this._fruits = Math.ceil(Math.random(0)*5)
+    if(this._age >= 9){ // mulai tahun ke-9 berbuah sedikit
+      this._fruits = Math.ceil(Math.random(0)*3)
     }
-    if(this._age > 2 && this._age < 24){ // tahun ke-2 mulai berbuah sampai tahun ke-23
-      this._fruits = Math.ceil(Math.random(0)*30)
+    if(this._age > 3 && this._age < 9){ // tahun ke-4 mulai berbuah sampai tahun ke-8
+      this._fruits = Math.ceil(Math.random(0)*20)
     }
   }
 
   getHeight() {
-    let randomHeight = Math.random(0)*2
-    if(this._age <= 20){ // tinggi bertambah hanya sampai umur 20 tahun
+    let randomHeight = Math.random(0)*1
+    if(this._age <= 9){ // tinggi bertambah hanya sampai umur 20 tahun
       this._height += randomHeight;
     }
   }
 
   getHealtyStatus() {
-    if(this._age == 25){ // umur ke-25 pohon mati
+    if(this._age == 10){ // umur ke-10 pohon mati
       this._healthyStatus = false
     }
   }
@@ -44,14 +44,14 @@ class MangoTree extends FruitTree {
         quality = 'good'
         this._quality.push('good')
       }
-      this._harvested.push(new Mango(grade, quality))
+      this._harvested.push(new Pear(grade, quality))
     }
   }
 
 }
 
-class Mango {
-  // Produce a mango
+class Pear {
+  // Produce a pear
   constructor(fruit,status) {
     this.grade = fruit
     this.quality = status
@@ -59,12 +59,12 @@ class Mango {
 }
 
 //driver code untuk release 0
-let mangoTree = new MangoTree()
+let pearTree = new PearTree()
 do {
-  mangoTree.grow();
-  mangoTree.produceFruit();
-  mangoTree.harvest();
-  console.log(`[Year ${mangoTree.age} Report] Height = ${mangoTree.height.toFixed(1)} m | Fruits harvested = ${mangoTree.harvested}`)
-} while (mangoTree.healthyStatus != false)
+  pearTree.grow();
+  pearTree.produceFruit();
+  pearTree.harvest();
+  console.log(`[Year ${pearTree.age} Report] Height = ${pearTree.height.toFixed(1)} m | Fruits harvested = ${pearTree.harvested}`)
+} while (pearTree.healthyStatus != false)
 
-module.exports = MangoTree;
+module.exports = PearTree;
