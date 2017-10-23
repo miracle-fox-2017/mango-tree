@@ -9,6 +9,7 @@ class FruitTree {
     this.healthyStatus = true;
     this._harvested = 0;
     this.fruits = null
+    this.mature =0
   }
 
   getAge() {
@@ -26,8 +27,8 @@ class FruitTree {
   // Grow the tree
   grow() {
     if(this._age <= this.max_age || this._height <= this.max_height){
-        this._age++;
-        this._height += +((Math.random() * 1.5) + 0).toFixed(1);
+      this._age++;
+      this._height += +((Math.random() * 1.5) + 0).toFixed(1);
     } else {
       this.healthyStatus = false;
     }
@@ -35,18 +36,13 @@ class FruitTree {
   }
   // Produce some fruits
   produceFruits(fruit) {
-    // console.log('------------',fruit);
     this.fruits = []
     let perDay = Math.floor((Math.random() * 10) + 2);
     for (var idx = 0; idx < perDay; idx++) {
-      // if (fruit === 'mango') {
-          this.fruits.push(new fruit())
-      // }
-
+      this.fruits.push(new fruit())
     }
-    // console.log('------------------',this.fruits);
-    this._harvested = this.fruits.length
-    return this.fruits
+      this._harvested = this.fruits.length
+      return this.fruits
   }
 
   // Get some fruits
@@ -65,6 +61,7 @@ class FruitTree {
   }
 
 }
+
 class Fruit {
   constructor() {
     this.quality = this.getQuality()
@@ -87,8 +84,6 @@ class MangoTree extends FruitTree {
     this.max_age = 20;
     this.max_height = 10;
   }
-
-
 }
 
 class Mango extends Fruit {
@@ -104,7 +99,6 @@ class AppleTree extends FruitTree {
     this.max_age = 10;
     this.max_height = 7;
   }
-
 }
 class Apple extends Fruit{
   constructor(){
@@ -126,34 +120,145 @@ class Pear extends Fruit{
   }
 }
 
-let mangoTree = new MangoTree()
-let appleTree = new AppleTree()
-let pearTree = new PearTree()
+
+let mangoTree = new MangoTree();
+let appleTree = new AppleTree();
+let pearTree = new PearTree();
+
+
 console.log('---------------------------POHON MANGGA-----------------------------------------');
 do {
   mangoTree.grow();
   mangoTree.produceFruits(Mango);
-  // mangoTree.harvest();
-  console.log(`[Year ${mangoTree._age} Report] Height = ${mangoTree._height} | Fruits harvested = ${mangoTree._harvested} ${mangoTree.harvest()}`)
+  mangoTree.harvest();
+  console.log(`[Year ${mangoTree._age} Report] Height = ${mangoTree._height} m | Fruits harvested = ${mangoTree._harvested} ${mangoTree.harvest()}`)
 } while (mangoTree.healthyStatus !== false)
+
 console.log('--------------------------------------------------------------------------------');
 console.log('---------------------------POHON APEL-------------------------------------------');
 do {
   appleTree.grow();
   appleTree.produceFruits(Apple);
   appleTree.harvest();
-  console.log(`[Year ${appleTree._age} Report] Height = ${appleTree._height} | Fruits harvested = ${appleTree._harvested} ${appleTree.harvest()}`)
+  console.log(`[Year ${appleTree._age} Report] Height = ${appleTree._height} m | Fruits harvested = ${appleTree._harvested} ${appleTree.harvest()}`)
 } while (appleTree.healthyStatus !== false)
+
 console.log('--------------------------------------------------------------------------------');
 console.log('---------------------------POHON PEER-------------------------------------------');
 do {
   pearTree.grow();
   pearTree.produceFruits(Pear);
   pearTree.harvest();
-  console.log(`[Year ${pearTree._age} Report] Height = ${pearTree._height} | Fruits harvested = ${pearTree._harvested} ${pearTree.harvest()}`)
+  console.log(`[Year ${pearTree._age} Report] Height = ${pearTree._height} m | Fruits harvested = ${pearTree._harvested} ${pearTree.harvest()}`)
 } while (pearTree.healthyStatus !== false)
-console.log('--------------------------------------------------------------------------------');
-// Release 3
-class TreeGrove {
 
+console.log('--------------------------------------------------------------------------------');
+
+
+//RELEASE 3
+class TreeGrove extends FruitTree{
+  constructor(){
+    super()
+    this.dataTrees = []
+  }
+  inputTree(nameTree, age, height, mature, status){
+    mangoTree.max_age = age
+    mangoTree.max_height = height
+    // mangoTree.mature = mature
+    if(nameTree === 'MangoTree'){
+      do{
+        mangoTree.grow();
+        mangoTree.produceFruits(Mango);
+        mangoTree.harvest();
+        this.dataTrees.push(
+          {
+              name : 'Mango',
+              year :mangoTree._age,
+              height :mangoTree._height,
+              mature : mature,
+              harvested :mangoTree._harvested,
+              harvest :mangoTree.harvest()
+          })
+      } while(mangoTree.healthyStatus !== false)
+    } else if(nameTree == 'AppleTree'){
+      do{
+        appleTree.grow();
+        appleTree.produceFruits(Apple);
+        appleTree.harvest();
+        // appleTree.mature = mature
+        this.dataTrees.push(
+          {
+              name : 'Apple',
+              year :appleTree._age,
+              height :appleTree._height,
+              mature : mature,
+              harvested :appleTree._harvested,
+              harvest :appleTree.harvest()
+          })
+      } while(appleTree.healthyStatus !== false)
+    } else if(nameTree == 'PearTree'){
+      do{
+        pearTree.grow();
+        pearTree.produceFruits(Pear);
+        pearTree.harvest();
+        // pearTree.mature = mature
+        this.dataTrees.push(
+          {
+              name : 'Pear',
+              year :pearTree._age,
+              height :pearTree._height,
+              mature : mature,
+              harvested :pearTree._harvested,
+              harvest :pearTree.harvest()
+          })
+      } while(pearTree.healthyStatus !== false)
+    } else {
+      console.log('Tidak ada Pohon itu');
+    }
+  }
+  show_ages(name){
+    let getAge = []
+    this.dataTrees.forEach(trees=>{
+      if(trees.name === name){
+        getAge.push(trees.year)
+      } else if(trees.name === name){
+        getAge.push(trees.year)
+      } else if(trees.name === name){
+        getAge.push(trees.year)
+      }
+    })
+    return getAge
+  }
+  show_trees(){
+    return this.dataTrees
+  }
+  mature_trees(){
+    let dataMature = []
+    this.dataTrees.forEach(trees=>{
+      if(trees.year <= trees.mature){
+        dataMature.push(trees)
+      }
+    })
+    return dataMature
+  }
+  dead_trees(){
+    let deadTrees = []
+    this.dataTrees.forEach(trees=>{
+      if(trees.year > trees.mature){
+        deadTrees.push(trees)
+      }
+    })
+    return deadTrees
+  }
 }
+// END RELEASE 3
+//Matikan Drive Code release 2 untuk menjalankan Drive code ini
+
+// let grove = new TreeGrove()
+// grove.inputTree('MangoTree', 20, 18, 7, true)
+// grove.inputTree('MangoTree', 5, 2.4, 12, true)
+// grove.inputTree('AppleTree', 4, 1.2, 5, true)
+// grove.inputTree('PearTree', 7, 2, 15, true)
+// console.log(grove.show_ages('Mango'));
+// console.log(grove.show_trees());
+// console.log(grove.mature_trees());
