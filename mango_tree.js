@@ -65,11 +65,19 @@ class MangoTree {
 
   // Get some fruits
   harvest() {
+    debugger
     let bad = 0
     let good = 0
     this._harvested = Math.round(this._produce *90 /100)
-    bad = this._harvested - Math.round(Math.random*10)
-    good = this._harvested - bad
+    let harvested = 0
+    harvested += this._harvested
+    for(let i = 0; i < harvested; i++){
+      if(Math.random()*10 < 2){
+        bad += 1
+      } else {
+        good += 1
+      }
+    }
 
     return `${good} good | ${bad} bad`
   }
@@ -90,7 +98,7 @@ class Mango {
     mangoTree.grow();
     mangoTree.produceMangoes();
     mangoTree.harvest();
-    console.log(`[Year ${mangoTree._age} Report] Height = ${mangoTree._height} cm | Fruits harvested = ${mangoTree._harvested}`)
+    console.log(`[Year ${mangoTree._age} Report] Height = ${mangoTree._height} cm | Fruits harvested = ${mangoTree.harvest()}`)
   } while (mangoTree._healthyStatus != false)
 
 
