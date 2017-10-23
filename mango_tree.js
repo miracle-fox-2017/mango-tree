@@ -92,11 +92,16 @@ class Mango extends MangoTree{
 
 
 // Release 1
-class AppleTree {}
-class Apple {}
+class AppleTree extends MangoTree {
+  constructor(){
+    super()
+    this.Maxbuah=40;
+  }
+}
+class Apple extends MangoTree{}
 
 // Release 2
-class FruitTree {}
+class FruitTree extends MangoTree {}
 class Fruit {}
 
 // Release 3
