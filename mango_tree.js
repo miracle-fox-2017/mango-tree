@@ -6,16 +6,27 @@ class MangoTree {
 
   // Initialize a new MangoTree
   constructor() {
+    this.maxUmur = 40;
+    this.maxTinggi = 300;
+    this.umur = 0;
+    this.tinggi = 0;
+    this.maxBuah = 0;
+    this.kumpulanBuah = 0;
+    this.buahDiPetik = 0;
+    this.kesehatan = true;
   }
 
   getAge() {
+    return this.umur
   }
   getHeight() {
-
+    return this.tinggi
   }
   getFruits() {
+    return this.kumpulanBuah
   }
   getHealtyStatus() {
+    return this.kesehatan
   }
 
 
@@ -23,6 +34,19 @@ class MangoTree {
 
   // Grow the tree
   grow() {
+    this.umur++
+    if (this.umur < this.maxUmur){
+      this.kumpulanBuah++
+      this.tinggi += Math.floor(Math.random()*9)
+    }
+    else if(this.umur == this.maxUmur / 2){
+      this.maxTinggi = this.tinggi
+      return this.maxTinggi
+    }
+
+    if (this.umur > this.maxUmur){
+      return this.kesehatan = false
+    }
   }
 
   // Produce some mangoes
@@ -38,6 +62,7 @@ class MangoTree {
 class Mango {
   // Produce a mango
   constructor() {
+    this.quality = quality
   }
 }
 
@@ -62,3 +87,6 @@ class Fruit {}
 
 // Release 3
 class TreeGrove {}
+
+let pohonMangga = new MangoTree()
+console.log(pohonMangga.grow())
