@@ -91,8 +91,16 @@ class Mango {
   */
 
 // Release 1
-class AppleTree {}
-class Apple {}
+class AppleTree extends MangoTree {
+  constructor(){
+    super()
+  }
+}
+class Apple extends Mango {
+  constructor(){
+    super()
+  }
+}
 
 // Release 2
 class FruitTree {}
