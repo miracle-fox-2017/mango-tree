@@ -121,27 +121,29 @@ class Apple extends Mango{}
 let maxApleAge = getRandomIntInclusive(8, 10);
 let appleTree = new AppleTree(0, 0, maxApleAge, getRandomIntInclusive(1, 3), 'Apel Lembang');
 
-do {
-  appleTree.grow();
-  appleTree.produceMangoes();
-  appleTree.harvest();
+// do {
+//   appleTree.grow();
+//   appleTree.produceMangoes();
+//   appleTree.harvest();
 
-  console.log(`[Year ${appleTree._age} Report] Height = ${appleTree._height} cm | Fruits harvested = ${appleTree._harvested}`)
+//   console.log(`[Year ${appleTree._age} Report] Height = ${appleTree._height} cm | Fruits harvested = ${appleTree._harvested}`)
 
-  if (appleTree.healthyStatus == false) {
-    console.log(`The ${appleTree._fruitName} tree has met its end. :sad:`);
-    // break;
-  } 
-} while (appleTree.healthyStatus != false)
+//   if (appleTree.healthyStatus == false) {
+//     console.log(`The ${appleTree._fruitName} tree has met its end. :sad:`);
+//     // break;
+//   } 
+// } while (appleTree.healthyStatus != false)
 
 
 // Release 2
 class FruitTree {
   // age = 0, height = 0, maxAge = 10, heightGrowth = getRandomIntInclusive(10,20), fruitName
-  constructor(heightGainYearly, maxAge, ageBloom, yearlyProduction) {
+  constructor(fruitName, heightGainYearly, maxAge, ageBloom, yearlyProduction) {
+    this._fruitName = fruitName;
     this._age = 0;
     this._height = 0;
     this._maxAge = maxAge;
+    this._heightGrowth = heightGainYearly;
     this._ageBloom = ageBloom;
     this._yearlyProduction = yearlyProduction;
     this._healthyStatus = true;
@@ -169,19 +171,22 @@ class FruitTree {
     this._height += this._heightGrowth;
 
     if (this._age === this._maxAge) {
-      tthis._healthyStatus = false;
+      this._healthyStatus = false;
     }
   }
 
   // Produce some mangoes
   produceFruits() {
-    let fruitProduced = getRandomIntInclusive(1,5);
+    let fruitProduced = this._yearlyProduction;
     let arrFruitProduced = [];
-
-    for (var i = 0; i < fruitProduced; i++) {
-      let quality = getRandomIntInclusive(0,1);
-      arrFruitProduced.push(new Fruit(quality));
+    // console.log(`===== ${this._age} ${this._ageBloom}  ====`);
+    if (this._age >= this._ageBloom) {
+      for (var i = 0; i < fruitProduced; i++) {
+        let quality = getRandomIntInclusive(0,1);
+        arrFruitProduced.push(new Fruit(quality));
+      }
     }
+    
 
     this._fruitProduced = arrFruitProduced;
   }
@@ -210,25 +215,38 @@ class Fruit {
   }
 }
 
-let fruitTree = new FruitTree(1, 15, 5, 5);
+class PearTree extends FruitTree {
+  constructor(fruitName, heightGainYearly, maxAge, ageBloom, yearlyProduction) {
+    super(fruitName, heightGainYearly, maxAge, ageBloom, yearlyProduction); 
+  }
+}
 
-// do {
-//   fruitTree.grow();
-//   fruitTree.produceMangoes();
-//   fruitTree.harvest();
+class Pear extends Fruit {
+  constructor(fruitQuality) {
+    super(fruitQuality);
+  }
+}
 
-//   console.log(`[Year ${fruitTree._age} Report] Height = ${fruitTree._height} cm | Fruits harvested = ${fruitTree._harvested}`)
 
-//   if (fruitTree.healthyStatus == false) {
-//     console.log(`The ${fruitTree._fruitName} tree has met its end. :sad:`);
-//     // break;
-//   } 
-// } while (fruitTree.healthyStatus != false)
+//name, heightGainYearly, maxAge, ageBloom, yearlyProduction
+let pearTree = new PearTree('Topaz Pear', getRandomIntInclusive(3,9), getRandomIntInclusive(2, 8), 3, getRandomIntInclusive(3, 5));
+
+do {
+  pearTree.grow();
+  pearTree.produceFruits();
+  pearTree.harvest();
+
+  console.log(`[Year ${pearTree._age} Report] Height = ${pearTree._height} cm | Fruits harvested = ${pearTree._harvested}`);
+
+  if (pearTree._healthyStatus == false) {
+    console.log(`The ${pearTree._fruitName} tree has met its end. :sad:`);
+  } 
+} while (pearTree._healthyStatus != false)
 
 // Release 3
-class TreeGrove {}
+class TreeGrove {
 
-
+}
 
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
