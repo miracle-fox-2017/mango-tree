@@ -7,7 +7,7 @@ class MangoTree {
   // Initialize a new MangoTree
   constructor() {
     this.maxUmur = 40;
-    this.maxTinggi = 300;
+    this.maxTinggi = 0;
     this.umur = 0;
     this.tinggi = 0;
     this.maxBuah = 0;
@@ -34,27 +34,30 @@ class MangoTree {
 
   // Grow the tree
   grow() {
-    this.umur++
+
     if (this.umur < this.maxUmur){
-      this.kumpulanBuah++
-      this.tinggi += Math.floor(Math.random()*9)
-    }
-    else if(this.umur == this.maxUmur / 2){
-      this.maxTinggi = this.tinggi
-      return this.maxTinggi
+      this.umur++
+      // this.kumpulanBuah+= Math.floor(Math.random() *30)
+      this.tinggi += Math.floor(Math.random()*15)
+
+      if(this.umur < this.maxUmur / 2){
+        this.maxTinggi = this.tinggi
+      }
     }
 
-    if (this.umur > this.maxUmur){
-      return this.kesehatan = false
+    if (this.umur >= this.maxUmur){
+      this.kesehatan = false
     }
   }
 
   // Produce some mangoes
   produceMangoes() {
+    this.kumpulanBuah+= Math.floor(Math.random() *30)
   }
 
   // Get some fruits
   harvest() {
+    this.buahDiPetik = Math.floor(this.kumpulanBuah * 0.75)
   }
 
 }
@@ -66,16 +69,15 @@ class Mango {
   }
 }
 
-/**
-  * driver code untuk release 0
-  * let mangoTree = new MangoTree()
-  * do {
-  *   mangoTree.grow();
-  *   mangoTree.produceMangoes();
-  *   mangoTree.harverst();
-  *   console.log(`[Year ${tree._age} Report] Height = ${tree._height} | Fruits harvested = ${tree._harvested}`)
-  * } while (mangoTree.healthyStatus != false)
-  */
+
+let mangoTree = new MangoTree()
+do {
+  mangoTree.grow();
+  mangoTree.produceMangoes();
+  mangoTree.harvest();
+  console.log(`[Year ${mangoTree.umur}th Report] Height = ${mangoTree.tinggi} cm | Fruits harvested = ${mangoTree.buahDiPetik}`)
+} while (mangoTree.kesehatan != false)
+
 
 // Release 1
 class AppleTree {}
