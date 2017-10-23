@@ -5,7 +5,8 @@
 class MangoTree {
 
   // Initialize a new MangoTree
-  constructor(age,height,fruitCapacity,fruitGrown,harvested,healthyStatus,good,bad,total) {
+  constructor(name,age,height,fruitCapacity,fruitGrown,harvested,healthyStatus,good,bad,total) {
+    this.name = name
     this._age            = 0
     this._height         = height
     this._fruitCapacity  = fruitCapacity
@@ -95,6 +96,20 @@ class AppleTree extends MangoTree {
   constructor(){
     super()
   }
+  grow() { 
+    
+    if(this._age < 20){
+      this._height = `${Math.floor(this._age * .19)}m`
+      this._age++
+       
+    }
+    else{
+      this.healthyStatus = false
+      console.log('The tree died :sad:')
+      
+      
+    }
+  } 
 }
 class Apple extends Mango {
   constructor(){
@@ -103,16 +118,50 @@ class Apple extends Mango {
 }
 
 // Release 2
-class FruitTree {}
-class Fruit {}
+class FruitTree {
+  constructor(age,height,fruitCapacity,fruitGrown,harvested,healthyStatus,good,bad,total) {
+    this._age            = 0
+    this._height         = height
+    this._fruitCapacity  = fruitCapacity
+    this._fruitGrown     = fruitGrown
+    this._harvested       = harvested
+    this._healthyStatus   = true
+    this.good = 0
+    this.bad = 0
+    this.total = 0
+  }
+}
+class Fruit {
+    // Produce a mango
+    constructor(quality) {
+      this.quality = quality
+    }
+    harvest(){
+     
+        
+      
+    }
+}
 
 // Release 3
-class TreeGrove {}
+class TreeGrove {
+  constructor(inputTree){
+    this.inputTree = this.inputTree(name,age,height,fruits,health)
+
+    }
+    inputTree(name,age,height,fruits,health){
+      let pohonBaru = new FruitTree(name,age,height,fruits,health)
+    }
+  }
+  
+
 
  let mangoTree = new MangoTree()
  do {
    mangoTree.grow();
    mangoTree.produceMangoes();
    mangoTree.harvest();
+   //saya kira karena ini release 0 jadi pake class mango tree...tapi saya ngerti kalo dibikin class nya tree
   console.log(`[Year ${mangoTree._age} Report] Height = ${mangoTree._height} | Fruits harvested = ${mangoTree._harvested}`)
  } while (mangoTree.healthyStatus != false)
+ console.log('Belom selesaaaaaaaaaaiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii')
