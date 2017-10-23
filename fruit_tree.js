@@ -89,6 +89,7 @@ class Fruit {
   // Produce a mango
   constructor() {
     this.quality = this.random()
+    this.nama = 'buah'
   }
 
   random() {
@@ -111,10 +112,24 @@ class MangoTree extends FruitTree {
     this.tambahTinggi = 5
     this.maxBuah = 11
   }
+
+  produceMangoes() {
+    this.buahtersedia = []
+    if(this.age <= this.maxAge) {
+      var jumlahBuah = Math.floor(Math.random() * this.maxBuah)
+
+      for(var i = 0; i <= jumlahBuah; i++) {
+        this.buahtersedia.push(new Mango())
+      }
+    }
+  }
 }
 
 class Mango extends Fruit {
-
+  constructor() {
+    super()
+    this.nama = 'Mango'
+  }
 }
 
 class AppleTree extends FruitTree {
@@ -124,10 +139,25 @@ class AppleTree extends FruitTree {
     this.tambahTinggi = 9
     this.maxBuah = 6
   }
+
+  produceMangoes() {
+    this.buahtersedia = []
+    if(this.age <= this.maxAge) {
+      var jumlahBuah = Math.floor(Math.random() * this.maxBuah)
+
+      for(var i = 0; i <= jumlahBuah; i++) {
+        this.buahtersedia.push(new Apple())
+      }
+    }
+  }
+
 }
 
 class Apple extends Fruit {
-
+  constructor() {
+    super()
+    this.nama = 'Apple'
+  }
 }
 
 class PearTree extends FruitTree {
@@ -137,13 +167,27 @@ class PearTree extends FruitTree {
     this.tambahTinggi = 10
     this.maxBuah = 10
   }
+
+  produceMangoes() {
+    this.buahtersedia = []
+    if(this.age <= this.maxAge) {
+      var jumlahBuah = Math.floor(Math.random() * this.maxBuah)
+
+      for(var i = 0; i <= jumlahBuah; i++) {
+        this.buahtersedia.push(new Pear())
+      }
+    }
+  }
 }
 
 class Pear extends Fruit {
-
+  constructor() {
+    super()
+    this.nama = 'Pear'
+  }
 }
 
-var mangga = new PearTree()
+var mangga = new MangoTree()
 console.log(mangga);
 
 // var mangga = new FruitTree()
@@ -152,6 +196,8 @@ do {
   mangga.grow()
   mangga.produceMangoes()
   mangga.harvest()
-  console.log(`[Year ${mangga.age} Report] Height = ${mangga.height} | Fruits harvested = ${mangga.harvested[2]} (${mangga.harvested[0]} good, ${mangga.harvested[1]} bad)`)
+  console.log(`[Year ${mangga.age} Report] Height = ${mangga.height} | ${mangga.buahtersedia[0].nama} harvested = ${mangga.harvested[2]} (${mangga.harvested[0]} good, ${mangga.harvested[1]} bad)`)
 } while(mangga.healthyStatus == true)
 console.log('Pohon telah tiada');
+
+console.log(new Fruit());
