@@ -290,7 +290,7 @@ class Fruit {
   getQuality(){
     let randQuality = Math.floor(Math.random())
     // console.log(randQuality);
-    if(randQuality == 1){
+    if(randQuality === 1){
       this.quality = 'good'
     }else{
       this.quality = 'bad'
