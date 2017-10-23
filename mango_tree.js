@@ -1,14 +1,11 @@
 "use strict"
 
-// release 0
-
-class MangoTree {
-
-  // Initialize a new MangoTree
-  constructor() {
+class FruitTree {
+  constructor(){
     this._age = 0;
     this._height = 0;
-    this.max_fruits = 0;
+    this.max_age = 0;
+    this.max_height = 0;
     this.healthyStatus = true;
     this._harvested = 0;
     this.fruits = null
@@ -26,32 +23,28 @@ class MangoTree {
   getHealtyStatus() {
     return this.healthyStatus
   }
-
-
-  // Get current states here
-
   // Grow the tree
   grow() {
-    // this.fruits = []
-    if(this._age <= 20 || this._height <= 10){
-      // if(this._age <= 5){
+    if(this._age <= this.max_age || this._height <= this.max_height){
         this._age++;
         this._height += +((Math.random() * 1.5) + 0).toFixed(1);
-      // }
     } else {
       this.healthyStatus = false;
     }
     return this
   }
-
-  // Produce some mangoes
-  produceMangoes() {
+  // Produce some fruits
+  produceFruits(fruit) {
+    // console.log('------------',fruit);
     this.fruits = []
-    // let mango = new Mango()
     let perDay = Math.floor((Math.random() * 10) + 2);
     for (var idx = 0; idx < perDay; idx++) {
-      this.fruits.push(new Mango())
+      // if (fruit === 'mango') {
+          this.fruits.push(new fruit())
+      // }
+
     }
+    // console.log('------------------',this.fruits);
     this._harvested = this.fruits.length
     return this.fruits
   }
@@ -67,20 +60,18 @@ class MangoTree {
         bad++
       }
     })
+    // console.log(good);
     return `(${good} good, ${bad} bad)`;
   }
 
 }
-
-class Mango {
-  // Produce a mango
+class Fruit {
   constructor() {
     this.quality = this.getQuality()
   }
 
   getQuality(){
     let quality = Math.round(Math.random())
-    // console.log(quality);
     if(quality === 0){
       quality = 'good'
     } else {
@@ -89,28 +80,80 @@ class Mango {
     return quality
   }
 }
+//BUAG MANGGA
+class MangoTree extends FruitTree {
+  constructor(){
+    super()
+    this.max_age = 20;
+    this.max_height = 10;
+  }
 
-
- // driver code untuk release 0
- let mangoTree = new MangoTree()
- do {
-   mangoTree.grow();
-   mangoTree.produceMangoes();
-   mangoTree.harvest();
-   console.log(`[Year ${mangoTree._age} Report] Height = ${mangoTree._height} | Fruits harvested = ${mangoTree._harvested} ${mangoTree.harvest()}`)
- } while (mangoTree.healthyStatus !== false)
-
-// Release 1
-class AppleTree {
 
 }
-class Apple {
-  
+
+class Mango extends Fruit {
+  constructor(){
+    super()
+  }
 }
 
-// Release 2
-class FruitTree {}
-class Fruit {}
+//BUAH APEL
+class AppleTree extends FruitTree {
+  constructor(){
+    super()
+    this.max_age = 10;
+    this.max_height = 7;
+  }
 
+}
+class Apple extends Fruit{
+  constructor(){
+    super()
+  }
+}
+
+//BUAH PEER
+class PearTree extends FruitTree {
+  constructor(){
+    super()
+    this.max_age = 15;
+    this.max_height = 13;
+  }
+}
+class Pear extends Fruit{
+  constructor(){
+    super()
+  }
+}
+
+let mangoTree = new MangoTree()
+let appleTree = new AppleTree()
+let pearTree = new PearTree()
+console.log('---------------------------POHON MANGGA-----------------------------------------');
+do {
+  mangoTree.grow();
+  mangoTree.produceFruits(Mango);
+  // mangoTree.harvest();
+  console.log(`[Year ${mangoTree._age} Report] Height = ${mangoTree._height} | Fruits harvested = ${mangoTree._harvested} ${mangoTree.harvest()}`)
+} while (mangoTree.healthyStatus !== false)
+console.log('--------------------------------------------------------------------------------');
+console.log('---------------------------POHON APEL-------------------------------------------');
+do {
+  appleTree.grow();
+  appleTree.produceFruits(Apple);
+  appleTree.harvest();
+  console.log(`[Year ${appleTree._age} Report] Height = ${appleTree._height} | Fruits harvested = ${appleTree._harvested} ${appleTree.harvest()}`)
+} while (appleTree.healthyStatus !== false)
+console.log('--------------------------------------------------------------------------------');
+console.log('---------------------------POHON PEER-------------------------------------------');
+do {
+  pearTree.grow();
+  pearTree.produceFruits(Pear);
+  pearTree.harvest();
+  console.log(`[Year ${pearTree._age} Report] Height = ${pearTree._height} | Fruits harvested = ${pearTree._harvested} ${pearTree.harvest()}`)
+} while (pearTree.healthyStatus !== false)
+console.log('--------------------------------------------------------------------------------');
 // Release 3
-class TreeGrove {}
+class TreeGrove {
+
+}
