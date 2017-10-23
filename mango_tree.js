@@ -95,7 +95,7 @@ class Mango {
    console.log(`The tree has met its end. :sad:`)
 
 
-// Release 1
+//Release 1
 class AppleTree {
   constructor() {
     this._age            = 0
@@ -129,7 +129,7 @@ class AppleTree {
     this.fruit_available = []
     let productive_mango_peryear = Math.floor(Math.random() * 13 - 1) + 1
     for(let i=0; i<productive_mango_peryear; i++){
-      this.fruit_available.push(new Mango())
+      this.fruit_available.push(new Apple())
     }
     // console.log(this.fruit_available)
     return this.fruit_available
@@ -183,12 +183,3 @@ class Apple {
      console.log(`[Year ${appleTree._age} Report] Height = ${appleTree._height} m | Fruits harvested = ${appleTree.harvest()}`)
    } while (appleTree.healthyStatus != false)
    console.log(`The tree has met its end. :sad:`)
-
-
-
-// Release 2
-class FruitTree {}
-class Fruit {}
-
-// Release 3
-class TreeGrove {}
