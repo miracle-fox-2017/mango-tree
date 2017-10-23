@@ -38,11 +38,13 @@ class MangoTree {
   grow() {
     this._age += 1;
     //random Math.floor(Math.random()*(max-min+1)+min);
-    //kalau tinggi lebih dari 500...... ga bisa tambah tinggi
-    if(this._height > 500){
-      this._height += 0;
+    //kalau tinggi lebih dari 5m...... ga bisa tambah tinggi
+    if(Math.floor(Number(this._height)) > 5){
+      this._height = this._height;
     } else {
-      this._height += Math.floor((Math.random() * (40-20+1)+20));
+      this._height = Number(this._height);
+      this._height += Math.random();
+      this._height = this._height.toFixed(2);
     }
     //pohon mati diantara umur 20-30 tahun
     if(this._age > Math.floor((Math.random() * (30-20+1)+20))){
@@ -97,7 +99,7 @@ do {
   mangoTree.grow();
   mangoTree.produceMangoes();
   mangoTree.harverst();
-  console.log(`[Year ${mangoTree._age} Report] Height = ${mangoTree._height} cm | Fruits harvested = ${mangoTree._harvested}`)
+  console.log(`[Year ${mangoTree._age} Report] Height = ${mangoTree._height} m | Fruits harvested = ${mangoTree._harvested}`)
 } while (mangoTree.healthyStatus != false)
 
 console.log('The tree has met its end !!');
@@ -115,7 +117,7 @@ do {
   appleTree.grow();
   appleTree.produceMangoes();
   appleTree.harverst();
-  console.log(`[Year ${appleTree._age} Report] Height = ${appleTree._height} cm | Fruits harvested = ${appleTree._harvested}`)
+  console.log(`[Year ${appleTree._age} Report] Height = ${appleTree._height} m | Fruits harvested = ${appleTree._harvested}`)
 } while (appleTree.healthyStatus != false)
 
 console.log('The tree has met its end !!');
