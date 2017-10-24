@@ -1,17 +1,20 @@
 "use strict"
 
-// release 0
-
-class MangoTree {
+// Release 2
+class FruitTree {
 
   // Initialize a new MangoTree
-  constructor() {
+  constructor(name) {
+    this._name = name;
     this._age = 0;
     this._height = 0;
-    this._harvested = 0;
-    this.jumlahBuah = 0;
-    this.totalBuah = 0;
-    this.healthyStatus = true;
+    this._maxFruit = 5;
+    // this._maxFruit = 30;
+    this._fruit = [];
+    this._healthyStatus = true;
+    // this._maxAge = 2;
+    this._maxAge = 0; //buat parameter akan dirandom umur matinya antara 10-20
+    this._harvested = '';
   }
 
   getAge() {
@@ -21,110 +24,135 @@ class MangoTree {
     return this._height;
   }
   getFruits() {
-    return this._harvested;
+    return this.fruit;
   }
   getHealtyStatus() {
-    return this.healthyStatus;
+    return this._healthyStatus;
   }
 
 
   // Get current states here
-  get tree (){
-    this._age
-  }
-
 
   // Grow the tree
   grow() {
     this._age += 1;
-    //random Math.floor(Math.random()*(max-min+1)+min);
-    //kalau tinggi lebih dari 5m...... ga bisa tambah tinggi
-    if(Math.floor(Number(this._height)) > 5){
-      this._height = this._height;
-    } else {
-      this._height = Number(this._height);
-      this._height += Math.random();
-      this._height = this._height.toFixed(2);
+    
+    //random tingginya dari 1-20cm per tahun
+    let randomHeight = Math.ceil(Math.random()*20);
+    //to cm
+    this._height = this._height*100;
+    
+    this._height += randomHeight;
+    
+    //to m
+    this._height = (this._height/100).toFixed(2);
+    
+    //random kapan dia mati antara 10~20
+    this._maxAge = Math.floor(Math.random() * (20 - 10 + 1)) + 10
+    
+    //if maxed agenya... dia mati
+    if(this._age>this._maxAge && this._healthyStatus == true){
+      this._healthyStatus = false;
     }
-    //pohon mati diantara umur 20-30 tahun
-    if(this._age > Math.floor((Math.random() * (30-20+1)+20))){
-      this.healthyStatus = false;
-    }
-    //if umur >5 berbuah tiap 1 tahun = random 45-70
-    if(this._age>5){
-      this.jumlahBuah = Math.floor((Math.random() * (70-45+1)+45))
-        // this._harvested = Math.floor((Math.random() * (70-45+1)+45))
-    }
+    
   }
 
-  // Produce some mangoes
-  produceMangoes() {
-    // console.log(this.jumlahBuah);
-    let panen = new Mango(this.jumlahBuah);
-    let good = panen.isQualityGood();
-    let result = panen.jumlahBuah + ' (' + good + ' good, ' + (this.jumlahBuah-good) + ' bad)'
-    this._harvested = result;
-  }
+  // Produce some fruit
+  produceFruit() {}
 
   // Get some fruits
-  harverst() {
-    this.totalBuah += this.jumlahBuah;
+  harvest() {
+    //lopping fruits cari berapa good berapa bad
+    let goodFruit = 0;
+    let badFruit = 0;
+    for(let i =0; i<this._fruit.length; i++){
+      if(this._fruit[i].quality == 'good'){
+        goodFruit += 1;
+      } else if (this._fruit[i].quality == 'bad'){
+        badFruit += 1;
+      }
+    }
+    
+    this._harvested = this._fruit.length + ' (' +goodFruit+' good, '+badFruit+ ' bad) ';
+    //emtpy fruit
+    this._fruit = [];
   }
+
 
 }
-
-class Mango {
+class Fruit {
   // Produce a mango
-  constructor(jumlahBuah) {
-    this.jumlahBuah = jumlahBuah;
-    this.quality = null;
+  constructor() {
+    this.quality = this.goodOrBad();
   }
-  
-  isQualityGood (){
-    if(this.jumlahBuah>0){
-      return Math.floor((Math.random() * (this.jumlahBuah-1+1)+1));
+  goodOrBad(){
+    let rand = Math.ceil(Math.random()*10);
+    if(rand<5){
+      return 'good'
     } else {
-      return 0;
+      return 'bad'
     }
   }
 }
 
-
-//driver code untuk release 0
-console.log('The tree is alive !!');
-
-let mangoTree = new MangoTree();
-
-do {
-  mangoTree.grow();
-  mangoTree.produceMangoes();
-  mangoTree.harverst();
-  console.log(`[Year ${mangoTree._age} Report] Height = ${mangoTree._height} m | Fruits harvested = ${mangoTree._harvested}`)
-} while (mangoTree.healthyStatus != false)
-
-console.log('The tree has met its end !!');
+// release 0
+class MangoTree extends FruitTree{
+  constructor(name){
+    super(name);
+  }
+  
+  // Produce some mangoes
+  produceFruit() {
+    //random buah
+    let randBuah = Math.ceil(Math.random()*this._maxFruit);
+    //loop sebanyak buah push ke mango
+    for(let i = 0; i<randBuah; i++){
+      this._fruit.push(new Mango());
+    }
+  }
+}
+class Mango extends Fruit{}
 
 // Release 1
-class AppleTree extends MangoTree{}
-class Apple extends Mango{}
+class AppleTree extends FruitTree{
+  constructor(name){
+    super(name)
+  }
+  
+  // Produce some mangoes
+  produceFruit() {
+    //random buah
+    let randBuah = Math.ceil(Math.random()*this._maxFruit);
+    //loop sebanyak buah push ke mango
+    for(let i = 0; i<randBuah; i++){
+      this._fruit.push(new Apple());
+    }
+  }
+}
+class Apple extends Fruit{}
 
 //driver code untuk release 0
-console.log('The tree is alive !!');
+let mangoTree = new MangoTree('pohon mangga')
+console.log('The Mango Tree is Alive !!');
+do {
+  mangoTree.grow();
+  mangoTree.produceFruit();
+  mangoTree.harvest();
+  console.log(`[Year ${mangoTree._age} Report] Height = ${mangoTree._height} m | Fruits harvested = ${mangoTree._harvested}`)
+} while (mangoTree._healthyStatus != false)
+console.log('The Mango Tree Has meet its end. !!');
 
-let appleTree = new AppleTree();
+console.log('\n=============\n');
 
+let appleTree = new AppleTree('pohon apel')
+console.log('The Apple Tree is Alive !!');
 do {
   appleTree.grow();
-  appleTree.produceMangoes();
-  appleTree.harverst();
+  appleTree.produceFruit();
+  appleTree.harvest();
   console.log(`[Year ${appleTree._age} Report] Height = ${appleTree._height} m | Fruits harvested = ${appleTree._harvested}`)
-} while (appleTree.healthyStatus != false)
-
-console.log('The tree has met its end !!');
-
-// Release 2
-class FruitTree {}
-class Fruit {}
+} while (appleTree._healthyStatus != false)
+console.log('The Apple Tree Has meet its end. !!');
 
 // Release 3
-class TreeGrove {}
+// class TreeGrove {}
