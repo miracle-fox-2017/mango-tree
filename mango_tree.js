@@ -8,21 +8,24 @@ class MangoTree {
   constructor() {
     this.age = 0
     this.height = 0
-    this.buah = 20
-    this.stat = stat
+    this.buahMaks = 20
+    this.kumBuah = []
+    this.harvested = 0
+    this.healthyStatus = true
+    this.maxAge = 10
   }
 
   getAge() {
-    this.age
+    return this.age
   }
   getHeight() {
-    this.height
+    return this.height
   }
   getFruits() {
-    this.buah
+    return this.buah
   }
   getHealtyStatus() {
-    this.stat
+    return this.healthyStatus
   }
 
 
@@ -30,34 +33,50 @@ class MangoTree {
 
   // Grow the tree
   grow() {
-    this.age += 1
-    if(this.age <= 10){
-      this.stat = true
+
+    if(this.age < this.maxAge && this.healthyStatus == true){
+      this.age++
+      this.height++
     }
     else{
-      this.stat = false
+      this.healthyStatus = false
     }
   }
 
   // Produce some mangoes
   produceMangoes() {
+    let random = Math.round(Math.random()*this.buahMaks)
+    for (var i = 0; i < random.length; i++) {
+      this.kumBuah.push(new Mango())
+    }
   }
 
   // Get some fruits
   harvest() {
+    for (var i = 0; i < this.kumBuah.length; i++) {
+      if(this.kumBuah.quality=='good'){
+        countGood++
+      }else{
+        countBad++
+      }
+    }
+    return `jumlah buah : ${this.kumBuah.length} || (good: ${countGood} good;bad: ${countBad} bad)`
   }
 
 }
 
 class Mango {
   // Produce a mango
-  constructor(quality) {
-    this.quality = quality
+  constructor() {
+    this.quality = this.getQuality
+  }
+  getQuality(){
+      
   }
 }
 
 
-   driver code untuk release 0
+   //driver code untuk release 0
    let mangoTree = new MangoTree()
    do {
      mangoTree.grow();
