@@ -100,45 +100,45 @@ class PeachTree extends FruitTree {
   } 
 }
    // driver code untuk release 0
-   let mangoTree = new MangoTree('mangga', 0, 0.1, 10, 0, true, 15, 10)
-   // console.log(mangoTree);
-   // console.log(mangoTree.produceFruits());
-   console.log('The tree is alive !');
-   do {
-     mangoTree.grow()
-     mangoTree.produceFruits()
-     mangoTree.harvest()
-     console.log(`[Year ${mangoTree._age} Report] Height = ${mangoTree._height} | ${mangoTree._name} harvested = ${mangoTree._harvested}`)
-   } while (mangoTree.healthyStatus != false)
+//    let mangoTree = new MangoTree('mangga', 0, 0.1, 10, 0, true, 15, 10)
+//    // console.log(mangoTree);
+//    // console.log(mangoTree.produceFruits());
+//    console.log('The tree is alive !');
+//    do {
+//      mangoTree.grow()
+//      mangoTree.produceFruits()
+//      mangoTree.harvest()
+//      console.log(`[Year ${mangoTree._age} Report] Height = ${mangoTree._height} | ${mangoTree._name} harvested = ${mangoTree._harvested}`)
+//    } while (mangoTree.healthyStatus != false)
 
-   console.log('The tree has met its end');
+//    console.log('The tree has met its end');
   
 
-// Release 1
+// // Release 1
 
 
-let appleTree = new AppleTree('apel', 0, 0.1, 10, 0, true, 18, 15)
+// let appleTree = new AppleTree('apel', 0, 0.1, 10, 0, true, 18, 15)
 
-  console.log('The tree is alive');
-   do {
-     appleTree.grow()
-     appleTree.produceFruits()
-     appleTree.harvest()
-     console.log(`[Year ${appleTree._age} Report] Height = ${appleTree._height} | ${appleTree._name} harvested = ${appleTree._harvested}`)
-   } while (appleTree.healthyStatus != false)
-   console.log('The tree has met its end');
+//   console.log('The tree is alive');
+//    do {
+//      appleTree.grow()
+//      appleTree.produceFruits()
+//      appleTree.harvest()
+//      console.log(`[Year ${appleTree._age} Report] Height = ${appleTree._height} | ${appleTree._name} harvested = ${appleTree._harvested}`)
+//    } while (appleTree.healthyStatus != false)
+//    console.log('The tree has met its end');
 
-// Release 2
-let peachTree = new PeachTree('pear', 0, 0.1, 12, 0, true, 20, 15)
+// // Release 2
+// let peachTree = new PeachTree('pear', 0, 0.1, 12, 0, true, 20, 15)
 
-  console.log('The tree is alive');
-   do {
-     peachTree.grow()
-     peachTree.produceFruits()
-     peachTree.harvest()
-     console.log(`[Year ${peachTree._age} Report] Height = ${peachTree._height} | ${peachTree._name} harvested = ${peachTree._harvested}`)
-   } while (peachTree.healthyStatus != false)
-   console.log('The tree has met its end');
+//   console.log('The tree is alive');
+//    do {
+//      peachTree.grow()
+//      peachTree.produceFruits()
+//      peachTree.harvest()
+//      console.log(`[Year ${peachTree._age} Report] Height = ${peachTree._height} | ${peachTree._name} harvested = ${peachTree._harvested}`)
+//    } while (peachTree.healthyStatus != false)
+//    console.log('The tree has met its end');
 
 // Release 3
 class TreeGrove {
@@ -159,17 +159,19 @@ class TreeGrove {
     if(name === 'PeachTree'){
       this.TreeGrove.push(new PeachTree('pear', age, height, 12, 0, healthyStatus, 20, 15))
     }
+
+    console.log(this.TreeGrove);
   }
 
   show_ages(){
     this.TreeGrove.forEach(batang =>{
-      console.log('pohon'+batang.name+' : '+batang.age+' tahun');
+      console.log('pohon'+batang._name+' : '+batang._age+' tahun');
     })
   }
 
   show_trees(){
     this.TreeGrove.forEach(batang =>{
-      console.log(batang.name);
+      console.log(batang._name);
     })
   }
 
@@ -188,9 +190,23 @@ class TreeGrove {
 
     return deadtree
   }
+
+  nextYear(){
+    this.TreeGrove.forEach(batang =>{
+      batang.grow()
+      batang.produceFruits()
+      batang.harvest()
+      console.log(`[Year ${batang._age} Report] Height = ${batang._height} | ${batang._name} harvested = ${batang._harvested}`)
+    })
+  }
 }
 
+let grove =  new TreeGrove()
 
+grove.inputTree('MangoTree', 3, 1.8, 7, true)
 
-
-}
+grove.nextYear()
+grove.show_ages()
+grove.show_trees()
+console.log(grove.mature_trees());
+console.log(grove.dead_trees());
