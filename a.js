@@ -13,5 +13,5 @@ class fox extends Animal {
   }
 }
 
-var serigala = new fox('edan')
+var serigala = new fox('gila')
 console.log(serigala)
