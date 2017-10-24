@@ -39,7 +39,7 @@ class FruitTree {
 
   // Produce some mangoes
   produceFruits() {
-    let fruitProduced = this._yearlyProduction;
+    let fruitProduced = getRandomIntInclusive(1, this._yearlyProduction);
     let arrFruitProduced = [];
 
     if (this._age >= this._ageBloom) {
@@ -57,7 +57,6 @@ class FruitTree {
       }
     }
     
-
     this._fruitProduced = arrFruitProduced;
   }
 
