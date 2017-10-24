@@ -10,11 +10,54 @@ class Dice
   }
 }
 
-class MangoTree {
-
-  // Initialize a new MangoTree
-  constructor()
+class MangoTree
+{
+  constructor(name)
   {
+    super(name)
+  }
+}
+
+class Mango extends Fruit
+{
+  constructor(quality)
+  {
+    super(quality);
+  }
+}
+
+
+  //  driver code untuk release 0
+   let mangoTree = new MangoTree()
+   console.log(`The tree is alive! :smile:`);
+   do {
+     mangoTree.grow();
+     mangoTree.produceMangoes();
+     mangoTree.harvest();
+     console.log(`[Year ${mangoTree._age} Report] Height = ${mangoTree._height} | Fruits harvested = ${mangoTree.harvest()}`)
+   } while (mangoTree._isHealty != false)
+
+   console.log(`The tree has met its end. :sad:`);
+
+// Release 1
+class AppleTree extends FruitTree
+{
+  
+}
+class Apple extends Fruit
+{
+  constructor(quality)
+  {
+    super(quality);
+  }
+}
+
+// Release 2
+class FruitTree
+{
+  constructor(name)
+  {
+    this.name = name;
     this._maxHeight = Dice.randomize(10, 20);
     this._maxAge = Dice.randomize(10, 35);
     this._height = 0;
@@ -84,11 +127,25 @@ class MangoTree {
       let condition = Dice.randomize(1,10)
       if (condition < 5)
       {
-        buahYangDipanen.push(new Mango(false))
+        if (this.name === "mango")
+        {
+          buahYangDipanen.push(new Mango(false))
+        }
+        else
+        {
+          buahYangDipanen.push(new Apple(false))
+        }
       }
       else
       {
-        buahYangDipanen.push(new Mango(true))
+        if (this.name === "mango")
+        {
+          buahYangDipanen.push(new Mango(true))
+        }
+        else
+        {
+          buahYangDipanen.push(new Apple(true))
+        }
       }
     }
 
@@ -105,38 +162,41 @@ class MangoTree {
     }
     return `${buahYangDipanen.length} (${this._buahSehat} good, ${this._buahSakit} bad)`
   }
-
 }
-
-class Mango
+class Fruit
 {
-  // Produce a mango
   constructor(quality)
   {
     this._quality = quality;
   }
 }
 
-
-  //  driver code untuk release 0
-   let mangoTree = new MangoTree()
-   console.log(`The tree is alive! :smile:`);
-   do {
-     mangoTree.grow();
-     mangoTree.produceMangoes();
-     mangoTree.harvest();
-     console.log(`[Year ${mangoTree._age} Report] Height = ${mangoTree._height} | Fruits harvested = ${mangoTree.harvest()}`)
-   } while (mangoTree._isHealty != false)
-
-   console.log(`The tree has met its end. :sad:`);
-
-// Release 1
-class AppleTree {}
-class Apple {}
-
-// Release 2
-class FruitTree {}
-class Fruit {}
-
 // Release 3
-class TreeGrove {}
+class TreeGrove
+{
+  constructor()
+  {
+    this.trees = []
+  }
+  
+  inputTree(tree)
+  {
+    this.trees.push(tree);
+  }
+  show_ages()
+  {
+    
+  }
+  show_trees()
+  {
+    
+  }
+  mature_trees()
+  {
+    
+  }
+  dead_trees()
+  {
+    
+  }
+}
