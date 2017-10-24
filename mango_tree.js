@@ -6,12 +6,12 @@ class MangoTree {
 
   // Initialize a new MangoTree
   constructor() {
-    this.maxUmur = 40;
+    this.maxUmur = 10;
     this.maxTinggi = 0;
     this.umur = 0;
     this.tinggi = 0;
-    this.maxBuah = 0;
-    this.kumpulanBuah = 0;
+    this.maxBuah = 20;
+    this.kumpulanBuah = [];
     this.buahDiPetik = 0;
     this.kesehatan = true;
   }
@@ -29,44 +29,63 @@ class MangoTree {
     return this.kesehatan
   }
 
-
-  // Get current states here
-
-  // Grow the tree
   grow() {
 
-    if (this.umur < this.maxUmur){
+    if (this.umur < this.maxUmur && this.kesehatan == true){
       this.umur++
-      // this.kumpulanBuah+= Math.floor(Math.random() *30)
-      this.tinggi += Math.floor(Math.random()*15)
+      this.tinggi += Math.floor(Math.random()*70)
 
       if(this.umur < this.maxUmur / 2){
         this.maxTinggi = this.tinggi
       }
     }
 
-    if (this.umur >= this.maxUmur){
+    else if (this.umur >= this.maxUmur){
       this.kesehatan = false
     }
   }
 
   // Produce some mangoes
   produceMangoes() {
-    this.kumpulanBuah+= Math.floor(Math.random() *30)
+    let randomBuah = Math.ceil(Math.random() * this.maxBuah)
+    for(var i = 0; i < randomBuah; i++){
+      this.kumpulanBuah.push(new Mango())
+    }
+    console.log(this.kumpulanBuah);
+    return this.kumpulanBuah
   }
 
   // Get some fruits
   harvest() {
-    this.buahDiPetik = Math.floor(this.kumpulanBuah * 0.75)
+    var countBad = 0;
+    var countGood = 0;
+    for(let i =0; i < this.kumpulanBuah.length; i++){
+      if(this.kumpulanBuah[i].quality === 'good'){ // akses array of object
+        countGood++
+      }
+      else {
+        countBad++
+      }
+    }
+    return `jumlah buah ${this.kumpulanBuah.length} || (good: ${countGood} : bad: ${countBad})`
   }
 
 }
 
 class Mango {
-  // Produce a mango
   constructor() {
-    this.quality = quality
+    this.quality = this.getQuality()
   }
+  getQuality(){
+    let randomQuality = Math.floor(Math.random()*2);
+    if(randomQuality === 0){
+      return 'bad'
+    }
+    else {
+      return 'good'
+    }
+  }
+
 }
 
 
@@ -75,7 +94,7 @@ do {
   mangoTree.grow();
   mangoTree.produceMangoes();
   mangoTree.harvest();
-  console.log(`[Year ${mangoTree.umur}th Report] Height = ${mangoTree.tinggi} cm | Fruits harvested = ${mangoTree.buahDiPetik}`)
+  console.log(`[Year ${mangoTree.umur}th Report] Height = ${mangoTree.tinggi} cm | Fruits harvested = ${mangoTree.harvest()}`)
 } while (mangoTree.kesehatan != false)
 
 
