@@ -44,9 +44,9 @@ class FruitTree {
 
     if (this._age >= this._ageBloom) {
       for (var i = 0; i < fruitProduced; i++) {
-        if (this._fruitName === 'Mangga') {
+        if (this._fruitName === 'Mango') {
            arrFruitProduced.push(new Mango());
-        } else if (this._fruitName === 'Apel') {
+        } else if (this._fruitName === 'Apple') {
            arrFruitProduced.push(new Apple());
         } else if (this._fruitName === 'Pear') {
            arrFruitProduced.push(new Pear());
@@ -94,7 +94,7 @@ class MangoTree extends FruitTree {
 
 class Mango extends Fruit {
   // Produce a mango
-  constructor(fruitQuality) {
+  constructor() {
     super();
   }
 }
@@ -119,13 +119,105 @@ class PearTree extends FruitTree {
 }
 
 class Pear extends Fruit {
-  constructor(fruitQuality) {
-    super(fruitQuality);
+  constructor() {
+    super();
   }
 }
 
+class TreeGrove {
+  constructor() {
+    this.treeName = '';
+    this.ageBloom = 2;
+    this.heightGainYearly = 1;
+    this.maxAge = 5 
+    this.healthy = true;
+    this.trees = [];
+    this.year = 0;
+  } 
+
+  nextYear() {
+    let tree = null;
+    this.year = this.year + 1;
+    console.log('YEAR: '+this.year);
+    for (var i = 0; i < this.trees.length; i++) {
+      this.trees[i].grow();
+      this.trees[i].produceFruits();
+      this.trees[i].harvest();
+      
+      console.log(`[${ this.trees[i]._fruitName} Year ${ this.trees[i]._age} Report] Height = ${ this.trees[i]._height} cm | Fruits harvested = ${ this.trees[i]._harvested}`);
+    }
+  }
+
+  inputTree(treeName, ageBloom, heightGainYearly, maxAge, healthy) {
+    this.treeName = treeName;
+    this.ageBloom = ageBloom;
+    this.heightGainYearly = heightGainYearly;
+    this.maxAge = maxAge ;
+    this.healthy = healthy;
+
+    let tree = null;
+    if (this.treeName === 'MangoTree') {
+      //name, heightGainYearly, maxAge, ageBloom, yearlyProduction
+      tree = new MangoTree('Mango', this.heightGainYearly, this.maxAge, this.ageBloom, getRandomIntInclusive(3, 5));
+    } else if (this.treeName === 'AppleTree') {
+      //name, heightGainYearly, maxAge, ageBloom, yearlyProduction
+      tree = new AppleTree('Apple', this.heightGainYearly, this.maxAge, this.ageBloom, getRandomIntInclusive(3, 5));
+    } else if (this.treeName === 'PearTree') {
+      //name, heightGainYearly, maxAge, ageBloom, yearlyProduction
+      tree = new PearTree('Pear', this.heightGainYearly, this.maxAge, this.ageBloom, getRandomIntInclusive(3, 5));
+    } else {
+      tree = new FruitTree('Fruit', this.heightGainYearly, this.maxAge, this.ageBloom, getRandomIntInclusive(3, 5));
+    }
+
+     this.trees.push(tree);
+   
+  }
+
+  show_ages() {
+    for (var i = 0; i < this.trees.length; i++) {
+      console.log(`Pohon ${this.trees[i]._fruitName} berumur ${this.trees[i]._age}`);
+    }
+  }
+
+  mature_trees() {  
+     for (var i = 0; i < this.trees.length; i++) {
+      if (this.year >= this.trees[i]._ageBloom) {
+        console.log(`Pohon ${this.trees[i]._fruitName} sudah mature berumur ${this.trees[i]._age}`);
+      }   
+    }
+  }
+
+  dead_trees() {
+    for (var i = 0; i < this.trees.length; i++) {
+      if (this.year >= this.trees[i]._maxAge) {
+        console.log(`Pohon ${this.trees[i]._fruitName} berumur ${this.trees[i]._age} sudah mati berumur ${this.trees[i]._maxAge}`);
+      }   
+    }
+  }
+}
+
+let looping = 0;
+
+let grove = new TreeGrove();
+grove.inputTree('MangoTree', 0, 1.8, 7, true);
+grove.inputTree('AppleTree', 2, 1, 4, true);
+grove.inputTree('PearTree', 4, 2.8, 3, true);
+
+grove.nextYear();
+grove.nextYear();
+grove.nextYear();
+
+grove.show_ages();
+grove.mature_trees();
+grove.dead_trees();
+
+// grove.show_ages();
+// grove.mature_trees();
+// grove.dead_trees();
+
+
 //name, heightGainYearly, maxAge, ageBloom, yearlyProduction
-let tree = new FruitTree('Mangga', getRandomIntInclusive(3,9), getRandomIntInclusive(2, 8), 3, getRandomIntInclusive(3, 5));
+/*let tree = new FruitTree('Mango', getRandomIntInclusive(3,9), getRandomIntInclusive(2, 8), 3, getRandomIntInclusive(3, 5));
 
 do {
   tree.grow();
@@ -137,13 +229,8 @@ do {
   if (tree._healthyStatus == false) {
     console.log(`The ${tree._fruitName} tree has met its end. :sad:`);
   } 
-} while (tree._healthyStatus != false)
+} while (tree._healthyStatus != false)*/
 
-
-// Release 3
-class TreeGrove {
-
-}
 
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
