@@ -9,6 +9,8 @@ class MangoTree {
     this._age = 0
     this._height = 0
     this._max_harvest = Math.floor(Math.random()*100)
+    this._hanging_fruit = []
+    // this.max_age = 10
     this._produce = 0
     this._harvested = 0
     this._healthyStatus = true
@@ -34,9 +36,9 @@ class MangoTree {
   grow() {
     this._age += 1
     if(this._age > 30 && this._age < 60){
-      this._height += Math.floor(Math.random())
+      this._height += Math.floor(Math.random()*10)
     } else {
-        this._height += Math.floor(Math.random()*10)
+        this._height += Math.floor(Math.random()*20)
     }
   if(this._age > 60){
       this._healthyStatus = false
@@ -66,18 +68,23 @@ class MangoTree {
   // Get some fruits
   harvest() {
     debugger
-    let bad = 0
+    let arr = []
     let good = 0
+    let bad = 0
     this._harvested = Math.round(this._produce *90 /100)
     let harvested = 0
     harvested += this._harvested
     for(let i = 0; i < harvested; i++){
-      if(Math.random()*10 < 2){
-        bad += 1
-      } else {
-        good += 1
+      arr.push(new Mango())
+    }
+    for(let j = 0; j < arr.length; j++){
+      if(arr[j].quality === 'bad'){
+        bad++
+      } else if (arr[j].quality === 'good'){
+        good++
       }
     }
+    // console.log(arr)
 
     return `${good} good | ${bad} bad`
   }
@@ -86,8 +93,17 @@ class MangoTree {
 
 class Mango {
   // Produce a mango
-  constructor(quality) {
-    this.quality = quality
+  constructor() {
+    this.quality = this.getQuality()
+  }
+
+  getQuality(){
+    let randomQuality = Math.floor(Math.random()*2)
+    if(randomQuality === 0){
+      return 'bad'
+    } else if (randomQuality === 1){
+      return 'good'
+    }
   }
 }
 
