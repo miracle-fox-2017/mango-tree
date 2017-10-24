@@ -1,5 +1,6 @@
 "use strict"
 
+
 // Release 2
 // fruit tree class inheritance
 class FruitTree {
@@ -10,7 +11,7 @@ class FruitTree {
     this.fruit_available = []
     this._harvested      = 0
     this.healthyStatus   = status
-    this.maximum_age     = max_age
+    this.maximum_age     = max_age 
   }
 
   // Get current states here
@@ -32,13 +33,13 @@ class FruitTree {
   // Produce some mangoes
   produceFruits(param_fruit) {
     let newFruit = param_fruit
-    let fruit = new newFruit()
+    // let fruit = new newFruit()
     // console.log('>>>>>', param_fruit);
 
     this.fruit_available = []
     let productive_fruit_peryear = Math.floor(Math.random() * 13 - 1) + 1
     for(let i=0; i<productive_fruit_peryear; i++){
-      this.fruit_available.push(fruit)
+      this.fruit_available.push(new newFruit())
     }
     // console.log('======fruit available====>>>',this.fruit_available)
     return this.fruit_available
@@ -49,7 +50,7 @@ class FruitTree {
   harvest() {
     let goodQuality = 0
     let badQuality  = 0
-
+    // console.log('<<<<>', this.fruit_available);
     for(let i=0; i<this.fruit_available.length; i++){
       // console.log('<><>><<>', this.fruit_available[i].quality);
       if(this.fruit_available[i].quality == 'good'){
@@ -103,15 +104,17 @@ class Fruit {
     this.quality = this.getQuality()
   }
   getQuality(){
-    let randQuality = Math.floor(Math.random())
+    let hasil = ''
+    let randQuality = Math.floor(Math.random() * 2 - 1) + 1
     // console.log(randQuality);
-    if(randQuality === 1){
-      this.quality = 'good'
+    if(randQuality === 0){
+      hasil = 'good'
     }else{
-      this.quality = 'bad'
+      hasil = 'bad'
     }
     // console.log('<<<<<< ',this.quality);
-    return this.quality
+    // console.log(hasil);
+    return hasil
   }
 }
 
@@ -144,7 +147,7 @@ let appleTree = new AppleTree()
 let mangoTree = new MangoTree()
 let pearTree = new PearTree()
 
-// console.log('-------------', mangoTree['fruit_available']);
+console.log('-------------', fruitTree);
 
 
 console.log('\n============================ MANGGO TREE REPORT =======================\n')
@@ -179,4 +182,28 @@ console.log(`The tree has met its end. :sad:`)
 
 
 // Release 3
-// class TreeGrove {}
+// class TreeGrove {
+//
+// }
+//
+// let grove = new TreeGrove()
+// // input your trees data !
+// grove.inputTree('MangoTree',3,1.8,7,true)
+// grove.inputTree('MangoTree',5,2.4,12,true)
+// grove.inputTree('AppleTree',4,1.2,5,true)
+// grove.inputTree('PearTree',7,2,15,true)
+//
+// // next Year
+// grove.nextyear()
+//
+// // show trees age
+// grove.showAge()
+//
+// // show trees
+// grove.showTrees()
+//
+// //show trees
+// grove.mature_trees()
+//
+// //show trees
+// grove.dead_trees()
