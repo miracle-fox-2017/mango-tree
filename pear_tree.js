@@ -3,62 +3,55 @@
 let FruitTree = require('./fruit_tree')
 
 class PearTree extends FruitTree {
-  // constructor(fruits,height,age,healt){
-    // super()
-    // this._age = age
-    // this._height = height
-    // this._fruits = fruits
-    // this._healthyStatus = healt
-  // }
+  constructor(name,fruits,height,age,health){
+    super(name,fruits,height,age,health)
+  }
 
   getFruits() {
-    if(this._age >= 9){ // mulai tahun ke-9 berbuah sedikit
-      this._fruits = Math.ceil(Math.random(0)*3)
+    let randomFruits
+    if(this.age <= 5){
+      randomFruits = 0
+    }else{
+      randomFruits = Math.ceil(Math.random()*this.maxFruits)
     }
-    if(this._age > 3 && this._age < 9){ // tahun ke-4 mulai berbuah sampai tahun ke-8
-      this._fruits = Math.ceil(Math.random(0)*20)
-    }
+    return randomFruits
   }
 
   getHeight() {
-    let randomHeight = Math.random(0)*1
-    if(this._age <= 9){ // tinggi bertambah hanya sampai umur 20 tahun
-      this._height += randomHeight;
+    let randomHeight = Math.random()*2
+    if(this.age <= 15){
+      this.height += randomHeight;
     }
   }
 
   getHealtyStatus() {
-    if(this._age == 10){ // umur ke-10 pohon mati
-      this._healthyStatus = false
+    if(this.age == 18){
+      this.healthyStatus = false
     }
   }
 
-  harvest() { // memulai harvest dan memisahkan antara kualitas good dan bad
+  produceFruit() {
+    let randomFruits = this.getFruits()
     let quality
-    for (var i = 0; i < this._fruits; i++) {
+    for (var i = 0; i < randomFruits; i++) {
       let grade = Math.ceil(Math.random(0)*10)
       if(grade <= 5){
         quality = 'bad'
-        this._quality.push('bad')
       }else{
         quality = 'good'
-        this._quality.push('good')
       }
-      this._harvested.push(new Pear(grade, quality))
+      this.fruits.push(new Pear(quality))
     }
   }
 
 }
 
 class Pear {
-  // Produce a pear
-  constructor(fruit,status) {
-    this.grade = fruit
+  constructor(status) {
     this.quality = status
   }
 }
 
-//driver code untuk release 0
 let pearTree = new PearTree()
 do {
   pearTree.grow();

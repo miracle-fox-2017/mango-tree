@@ -3,62 +3,55 @@
 let FruitTree = require('./fruit_tree')
 
 class MangoTree extends FruitTree {
-  // constructor(fruits,height,age,healt){
-    // super()
-    // this._age = age
-    // this._height = height
-    // this._fruits = fruits
-    // this._healthyStatus = healt
-  // }
+  constructor(name,fruits,height,age,health){
+    super(name,fruits,height,age,health)
+  }
 
   getFruits() {
-    if(this._age >= 24){ // tahun ke-24 tidak berbuah
-      this._fruits = Math.ceil(Math.random(0)*5)
+    let randomFruits
+    if(this.age <= 2){
+      randomFruits = 0
+    }else{
+      randomFruits = Math.ceil(Math.random()*this.maxFruits)
     }
-    if(this._age > 2 && this._age < 24){ // tahun ke-2 mulai berbuah sampai tahun ke-23
-      this._fruits = Math.ceil(Math.random(0)*30)
-    }
+    return randomFruits
   }
 
   getHeight() {
-    let randomHeight = Math.random(0)*2
-    if(this._age <= 20){ // tinggi bertambah hanya sampai umur 20 tahun
-      this._height += randomHeight;
+    let randomHeight = Math.random()*2
+    if(this.age <= 20){
+      this.height += randomHeight;
     }
   }
 
   getHealtyStatus() {
-    if(this._age == 25){ // umur ke-25 pohon mati
-      this._healthyStatus = false
+    if(this.age == 25){
+      this.healthyStatus = false
     }
   }
 
-  harvest() { // memulai harvest dan memisahkan antara kualitas good dan bad
+  produceFruit() {
+    let randomFruits = this.getFruits()
     let quality
-    for (var i = 0; i < this._fruits; i++) {
+    for (var i = 0; i < randomFruits; i++) {
       let grade = Math.ceil(Math.random(0)*10)
       if(grade <= 5){
         quality = 'bad'
-        this._quality.push('bad')
       }else{
         quality = 'good'
-        this._quality.push('good')
       }
-      this._harvested.push(new Mango(grade, quality))
+      this.fruits.push(new Mango(quality))
     }
   }
 
 }
 
 class Mango {
-  // Produce a mango
-  constructor(fruit,status) {
-    this.grade = fruit
+  constructor(status) {
     this.quality = status
   }
 }
 
-//driver code untuk release 0
 let mangoTree = new MangoTree()
 do {
   mangoTree.grow();

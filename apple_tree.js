@@ -3,62 +3,55 @@
 let FruitTree = require('./fruit_tree')
 
 class AppleTree extends FruitTree {
-  // constructor(fruits,height,age,healt){
-    // super()
-    // this._age = age
-    // this._height = height
-    // this._fruits = fruits
-    // this._healthyStatus = healt
-  // }
+  constructor(name,fruits,height,age,health){
+    super(name,fruits,height,age,health)
+  }
 
   getFruits() {
-    if(this._age >= 13){ // mulai tahun ke-13 berbuah sedikit
-      this._fruits = Math.ceil(Math.random(0)*4)
+    let randomFruits
+    if(this.age <= 3){
+      randomFruits = 0
+    }else{
+      randomFruits = Math.ceil(Math.random()*this.maxFruits)
     }
-    if(this._age > 3 && this._age < 13){ // tahun ke-4 mulai berbuah sampai tahun ke-12
-      this._fruits = Math.ceil(Math.random(0)*20)
-    }
+    return randomFruits
   }
 
   getHeight() {
-    let randomHeight = Math.random(0)*1
-    if(this._age <= 12){ // tinggi bertambah hanya sampai umur 20 tahun
-      this._height += randomHeight;
+    let randomHeight = Math.random()*2
+    if(this.age <= 18){
+      this.height += randomHeight;
     }
   }
 
   getHealtyStatus() {
-    if(this._age == 15){ // umur ke-15 pohon mati
-      this._healthyStatus = false
+    if(this.age == 20){
+      this.healthyStatus = false
     }
   }
 
-  harvest() { // memulai harvest dan memisahkan antara kualitas good dan bad
+  produceFruit() {
+    let randomFruits = this.getFruits()
     let quality
-    for (var i = 0; i < this._fruits; i++) {
+    for (var i = 0; i < randomFruits; i++) {
       let grade = Math.ceil(Math.random(0)*10)
       if(grade <= 5){
         quality = 'bad'
-        this._quality.push('bad')
       }else{
         quality = 'good'
-        this._quality.push('good')
       }
-      this._harvested.push(new Apple(grade, quality))
+      this.fruits.push(new Apple(quality))
     }
   }
 
 }
 
 class Apple {
-  // Produce a apple
-  constructor(fruit,status) {
-    this.grade = fruit
+  constructor(status) {
     this.quality = status
   }
 }
 
-//driver code untuk release 0
 let appleTree = new AppleTree()
 do {
   appleTree.grow();
@@ -66,6 +59,5 @@ do {
   appleTree.harvest();
   console.log(`[Year ${appleTree.age} Report] Height = ${appleTree.height.toFixed(1)} m | Fruits harvested = ${appleTree.harvested}`)
 } while (appleTree.healthyStatus != false)
-
 
 module.exports = AppleTree;

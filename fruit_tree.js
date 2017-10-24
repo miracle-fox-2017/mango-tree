@@ -1,65 +1,60 @@
 class FruitTree{
-  constructor() {
-    this._age = 0
-    this._height = 0
-    this._fruits = 0
-    this._harvested = []
-    this._healthyStatus = true
-    this._quality = []
+  constructor(name,fruits,height,age,health) {
+    this.name = name
+    this.age = age || 0
+    this.height = height || 0
+    this.maxFruits = fruits || 20
+    this.fruits = []
+    this.harvested = null
+    this.healthyStatus = health || true
   }
 
   getAge() {
-    this._age++
+    this.age++
   }
 
   grow() {
+    this.fruits = []
     this.getAge()
     this.getHeight()
     this.getHealtyStatus()
-    this._quality = []
-    this._harvested = []
   }
 
-  // Produce some mangoes
   produceFruit() {
-    this.getFruits()
+    let randomFruits = this.getFruits()
+    let quality
+    for (var i = 0; i < randomFruits; i++) {
+      let grade = Math.ceil(Math.random(0)*10)
+      if(grade <= 5){
+        quality = 'bad'
+      }else{
+        quality = 'good'
+      }
+      this.fruits.push(new Fruit(quality))
+    }
   }
 
-  qualityCheck() {
-    let good = 0
-    let bad = 0
-    for (var i = 0; i < this._quality.length; i++) {
-      if(this._quality[i] == 'good'){
-        good++
+  harvest() {
+    let countFruits = 0
+    let countGood = 0
+    let countBad = 0
+    for (var i = 0; i < this.fruits.length; i++) {
+      if(this.fruits[i].quality == 'good'){
+        countGood++
+        countFruits++
       }else{
-        bad++
+        countBad++
+        countFruits++
       }
     }
-    return `(${good} good, ${bad} bad)`
-  }
-
-  get age() {
-    return this._age
-  }
-
-  get height() {
-    return this._height
-  }
-
-  get healthyStatus() {
-    return this._healthyStatus
-  }
-
-  get harvested() {
-    return `${this._harvested.length} ${this.qualityCheck()}`
-  }
-
-  set harvested(value) {
-    this._harvested = value
+    this.harvested = `${countFruits} (${countGood} good || ${countBad} bad)`
   }
 }
 
 class Fruit{
+  constructor(quality) {
+    quality = quality
+  }
 
 }
 
