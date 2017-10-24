@@ -203,17 +203,17 @@ console.log(`The tree has met its end. :sad:`);
    constructor(){
      this.treesArr = []
    }
-  inputTree(name, age, height, batasUmur,healthyStatus){
+  inputTree(name, age, height, berbuah,healthyStatus){
     let tree = ''
     if(name === 'MangoTree'){
-      tree = new MangoTree(name, age, height, batasUmur, healthyStatus)
+      tree = new MangoTree(name, age, height, berbuah, healthyStatus)
       this.treesArr.push(tree)
     }else if(name === 'AppleTree'){
-      tree = new AppleTree(name, age, height, batasUmur, healthyStatus)
+      tree = new AppleTree(name, age, height, berbuah, healthyStatus)
       this.treesArr.push(tree)
     }
     else{
-      tree = new PearTree(name, age, height, batasUmur, healthyStatus)
+      tree = new PearTree(name, age, height, berbuah, healthyStatus)
       this.treesArr.push(tree)
     }
     return this.treesArr
