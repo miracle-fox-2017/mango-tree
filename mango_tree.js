@@ -54,45 +54,47 @@ class MangoTree {
   produceMangoes() {
     // this.jumlahBuah = [];
     this.Buah = Math.floor(Math.random() * this.Maxbuah);
-    for (let i = 0; i < this.Buah; i++) {
-      let manggo = new Mango();
-      this.jumlahBuah.push(manggo.getQuality());
-    }
+
+
 
   }
 
   // Get some fruits
   harvest() {
-    let countBad = 0;
-    let countGood = 0;
-    for(let i = 0;i < this.jumlahBuah.length;i++){
-      // console.log('ini jumlah buah'+this.jumlahBuah);
-      if (this.jumlahBuah[i]==='Good'){
+    let harvest = Math.floor(Math.random() * this.Buah);
+    this.Buah-=harvest
+    let basket=[]
+    for(let i = 0;i < harvest;i++){
+      basket.push(new Mango())
+    }
+    let countGood=0
+    let countBad=0
+    for(let i=0;i<basket.length;i++){
+      if(basket[i].quality=='Good'){
         countGood++
-      }else{
+      }
+      else{
         countBad++
       }
     }
-    return `Good ${countGood} | Bad ${countBad}`;
+    return `${harvest} Good ${countGood} | Bad ${countBad}`;
   }
 }
 
 
 
 
-class Mango extends MangoTree{
+class Mango {
   // Produce a mango
   constructor() {
-    super()
-    this.buahSehat=0
-    this.buahGakSehat=0
+    this.quality = this.getQuality()
   }
   getQuality(){
     let random = Math.floor(Math.random()*2);
     if (random==1){
-      return 'Bad';
-    }else{
       return 'Good';
+    }else{
+      return 'Bad';
     }
 
   }
@@ -105,7 +107,7 @@ class Mango extends MangoTree{
      mangoTree.grow();
      mangoTree.produceMangoes();
      mangoTree.harvest();
-     console.log(`[Year ${mangoTree.getAge()} Report] Height = ${mangoTree.getHeight()} | Fruits harvested = ${mangoTree.harvest()}`)
+     console.log(`[Year ${mangoTree.getAge()} Report] Height = ${mangoTree.getHeight()} | Fruits harvested =  ${mangoTree.harvest()}`)
    } while (mangoTree.isHealthy != false)
 
 
@@ -116,10 +118,10 @@ class AppleTree extends MangoTree {
     this.Maxbuah=40;
   }
 }
-class Apple extends MangoTree{}
+class Apple {}
 
 // Release 2
-class FruitTree extends MangoTree {}
+class FruitTree  {}
 class Fruit {}
 
 // Release 3
